@@ -12,4 +12,10 @@ module.exports = function (app) {
         
         res.send('该用户未报名!');
     });
+
+    app.get('/sign', function (req, res) {
+        res.render('sign_up/countdown', {
+            title : '倒计时'
+        });
+    })
 };
