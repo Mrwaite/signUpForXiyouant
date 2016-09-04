@@ -5,7 +5,11 @@ var router = express.Router();
 
 
 module.exports = function (app) {
-  app.get('/', function (req, res) {
-      res.render('index');
-  })
+    app.get('/', function (req, res) {
+        res.render('index');
+    });
+    app.post('/', function (req, res) {
+        
+        res.send('该用户未报名!');
+    });
 };
