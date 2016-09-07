@@ -17,5 +17,5 @@ module.exports = function (app) {
         res.render('sign_up/countdown', {
             title : '倒计时'
         });
-    })
+    });
 };
