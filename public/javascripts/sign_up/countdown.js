@@ -73,58 +73,46 @@ var Countdown = {
 
         this.countdown_interval = setInterval(function() {
 
-            if (that.total_seconds > 0) {
-
-
-
-
+            if (that.total_seconds >= 0) {
 
                 // Update DOM values
                 // Days
-                if (that.values.days > 0) {
-                    that.checkDay(that.values.days, $day_1, $day_2);
-                }
+                that.checkDay(that.values.days, $day_1, $day_2);
+
 
                 // Hours
-                if (that.values.hours > 0) {
-                    that.checkDay(that.values.hours, $hour_1, $hour_2);
-                }
+                that.checkDay(that.values.hours, $hour_1, $hour_2);
 
                 // Minutes
-                if (that.values.minutes > 0) {
-                    that.checkDay(that.values.minutes, $min_1, $min_2);
-                }
+                that.checkDay(that.values.minutes, $min_1, $min_2);
 
                 // Seconds
+                that.checkDay(that.values.seconds, $sec_1, $sec_2);
+
+                //开始计算下一秒的情况
                 if (that.values.seconds > 0) {
-                    that.checkDay(that.values.seconds, $sec_1, $sec_2);
-                }
-
-                --that.values.seconds;
-
-                if (that.values.minutes >= 0 && that.values.seconds <= 0) {
-
-                    that.values.seconds = 59;
+                    --that.values.seconds;
+                } else if (that.values.minutes > 0) {
                     --that.values.minutes;
-                } // end if
-
-                if (that.values.hours >= 0 && that.values.minutes <= 0) {
-
-                    that.values.minutes = 59;
+                    that.values.seconds = 59;
+                } else if (that.values.hours > 0) {
                     --that.values.hours;
-                } // end if
-
-                if (that.values.days > 0 && that.values.hours <= 0) {
-
-                    that.values.hours = 24;
+                    that.values.minutes = 59;
+                    that.values.seconds = 59;
+                } else if (that.values.days > 0) {
                     --that.values.days;
-                } // end if
+                    that.values.hours = 23;
+                    that.values.minutes = 59;
+                    that.values.seconds = 59;
+                }
 
                 --that.total_seconds;
             } // end if(that.total_seconds > 0)
             else {
                 clearInterval(that.countdown_interval);
-                //alert('1');
+                $('.countdown').hide();
+                var inter_html = $("<div class='ui inverted se . gment'style='text-align: center;'> <a class='ui inverted red button' href='../form' target='_self'>立即报名</a></div>");
+                $('.wrap').append(inter_html);
             }
         }, 1000);
     },
@@ -186,12 +174,12 @@ var Countdown = {
             if (fig_1_value !== '0') this.animateFigure($el_1, 0);
             if (fig_2_value !== val_1) this.animateFigure($el_2, val_1);
         } else {
-            this.animateFigure($el_1, 0);
-            this.animateFigure($el_2, 0);
+            if (fig_1_value !== '0') this.animateFigure($el_1, 0);
+            if (fig_2_value !== '0') this.animateFigure($el_2, 0);
         }
     }
 };
 
 
 // Let's go !
-Countdown.init('Sep 7, 2016 23:22');
+Countdown.init('Sep 9, 2016 05:07');

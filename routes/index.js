@@ -15,7 +15,12 @@ module.exports = function (app) {
 
     app.get('/sign', function (req, res) {
         res.render('sign_up/countdown', {
-            title : '倒计时'
+            title : '倒计时',
+            step : 1
         });
+    });
+
+    app.get('/form', function (req, res) {
+        res.send('1');
     });
 };
