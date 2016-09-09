@@ -34,7 +34,7 @@ var Countdown = {
         this.$ = {
             days: this.$el.find('.bloc-time.days .figure'),
             hours: this.$el.find('.bloc-time.hours .figure'),
-            minutes: this.$el.find('.bloc-time.min .figure'),
+           minutes: this.$el.find('.bloc-time.min .figure'),
             seconds: this.$el.find('.bloc-time.sec .figure')
         };
 
