@@ -1,0 +1,113 @@
+<! DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes,minimal-ui">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/semantic.min.css">
+    <link href="/stylesheets/sign/style.css" rel="stylesheet">
+    <link href="/stylesheets/sign/countdown.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/stylesheets/sign/form.css" >
+</head>
+<body id="example">
+<!--姓名 性别 预期方向 电话号码 学号 专业 年级-->
+<div class="ui fixed inverted main menu">
+    <div class="container">
+        <div class="title item">
+            <b>网络科技协会纳新:</b> 报名
+        </div>
+
+        <a class="icon item" href=""><i class="left chevron icon"></i></a>
+
+        <div class="section ui page dropdown link item">
+            <span class="count">  / 3</span>
+            <div class="menu transition hidden">
+
+                <a class="item" href="">
+                    1. 倒计时
+                </a>
+
+                <a class="item disabled" href="javascript:void(0)" disabled="true">
+                    2. 填写表单
+                </a>
+
+                <a class="item disabled" href="javascript:void(0)" disabled="true">
+                    3. 报名成功
+                </a>
+
+            </div>
+        </div>
+
+        <a class="icon item" href=""><i class="right chevron icon"></i></a>
+
+        <div class="right menu">
+            <a class="popup icon music item" data-content="播放音乐">
+                <i class="alternate music icon"></i>
+            </a>
+            <a class="popup icon github item" data-content="在GitHub中查看项目" href="https://github.com/Semantic-Org/Semantic-UI">
+                <i class="alternate github icon"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="maincontent" class="ui main container">
+    <div class="ui stackable grid">
+        <div class="column">
+            <div id="regUtgaende" class="ui stacked segment">
+                <a class="ui ribbon orange label">填写个人信息</a>
+
+                <!--提交表单-->
+                <form id="submitForm" class="ui form ">
+                    <div class="field">
+                        <label>姓名</label>
+                        <div class="ui left corner labeled input">
+                            <input type="text" placeholder="name">
+                            <div class="ui left corner orange label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>学号</label>
+                        <input type="text" name="stNumber" placeholder="student ID">
+                    </div>
+                    <div class="field">
+                        <label>联系方式</label>
+                        <input type="text" name="telNumber" placeholder="phone number">
+                    </div>
+                    <div class="fields">
+                        <div class="twelve wide field">
+                            <label>预期方向</label>
+                            <input type="text" placeholder="major">
+                        </div>
+                        <div class="four wide field">
+                            <label>性别</label>
+                            <input type="text" placeholder="grade">
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="eight wide field">
+                            <label>专业</label>
+                            <input type="text" placeholder="major">
+                        </div>
+                        <div class="eight wide field">
+                            <label>年级</label>
+                            <input type="text" placeholder="grade">
+                        </div>
+                    </div>
+                    <button class="ui button" type="submit">Submit</button>
+                </form>
+                <!--表单END-->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script src="/javascripts/jquery-3.1.0.min.js"></script>
+<script src="/javascripts/semantic.min.js"></script>
+<script src="/javascripts/sign_up/nav.js"></script>
+
+</html>

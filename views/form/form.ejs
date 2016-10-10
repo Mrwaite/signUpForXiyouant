@@ -1,0 +1,74 @@
+<% include ../header.ejs %>
+<link rel="stylesheet" href="/stylesheets/sign/form.css" >
+</head>
+<body id="example">
+<!--姓名 性别 预期方向 电话号码 学号 专业 年级-->
+<% include ../nav.ejs %>
+
+<div id="maincontent" class="ui main container">
+    <div class="ui stackable grid">
+        <div class="column">
+            <div id="regUtgaende" class="ui stacked segment">
+                <a class="ui ribbon orange label">填写个人信息</a>
+
+                <!--提交表单-->
+                <form id="submitForm" class="ui form " method="post">
+                    <div class="field">
+                        <label>姓名</label>
+                        <input id="name" type="text" name="name" placeholder="Name">
+                        <div id="name_lable" class="ui left pointing red basic label" style="display : none;">请输入中文</div>
+                    </div>
+                    <div class="field">
+                        <label>学号</label>
+                        <input id="stNumber" type="text" name="stNumber" placeholder="student ID">
+                        <div id="stNumber_lable" class="ui left pointing red basic label" style="display : none;">请输入8位学号</div>
+                    </div>
+                    <div class="field">
+                        <label>联系方式</label>
+                        <input id="telNumber" type="text" name="telNumber" placeholder="phone number">
+                        <div id="telNumber_lable" class="ui left pointing red basic label" style="display : none;">请输入规范手机号码</div>
+                    </div>
+                    <div class="fields">
+                        <div class="twelve wide field">
+                            <label>预期方向</label>
+                            <select name="direction" class="ui fluid dropdown">
+                                <option value="safe">安全</option>
+                                <option value="fe">前端</option>
+                                <option value="linux">运维</option>
+                            </select>
+                        </div>
+                        <div class="four wide field">
+                            <label>性别</label>
+                            <select name="sex"  class="ui fluid dropdown">
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div name="major" class="eight wide field">
+                            <label>专业班级</label>
+                            <input type="text" name="major" placeholder="major">
+                        </div>
+                        <div class="eight wide field">
+                            <label>年级</label>
+                            <select name="grade" class="ui fluid dropdown">
+                                <option value="one">大一</option>
+                                <option value="two">大二</option>
+                                <option value="three">大三</option>
+                                <option value="four">大四</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="submit" class="ui button" type="submit">提交</button>
+                </form>
+                <!--表单END-->
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<% include ../footer.ejs %>
+<script src="/javascripts/sign_up/form.js"></script>
+</html>
