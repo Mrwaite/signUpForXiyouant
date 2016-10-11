@@ -19,6 +19,12 @@
             margin: 0px auto;
         }
 
+@media (max-width : 920px) {
+    #example .container {
+        width : auto;
+    }
+}
+
 /*top menu dropdown*/
 .ui.dropdown .menu.active {
     display : block;

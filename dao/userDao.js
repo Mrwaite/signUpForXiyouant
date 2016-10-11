@@ -22,6 +22,7 @@ var jsonWrite = function (res, ret) {
 };
 
 module.exports ={
+    //向数据库添加记录
     add : function (req, res) {
         pool.getConnection(function (err, connection) {
             //获取前台页面传过来的数据
@@ -59,6 +60,48 @@ module.exports ={
 
             });
         });
-    } 
+    },
+    
+    checkNameOrSN : function (req, res) {
+        pool.getConnection(function (err, connection) {
+            if(err) {
+                //数据库连接失败
+            }
+            var param = req.body;
+            var select = '';
+            if(param.name) {
+                select = "select users.name from users where users.name=" + "'" + param.name + "'";
+                connection.query(select, function (err, result) {
+                    if(err) {
+                        res.send(err);
+                    }
+                    if(result.length > 0) {
+                        //表示存在这个name
+                        res.json({code : 1});
+                    } else {
+                        //表示不存在这个name
+                        res.json({code : 2});
+                    }
+                    connection.release();
+                });
+            } else if (param.stNumber) {
+                select = "select users.stNumber from users where users.stNumber=" + "'" + param.stNumber + "'";
+                connection.query(select, function (err, result) {
+                    if(err) {
+                        res.send(err);
+                    }
+                    if(result.length > 0) {
+                        //res.redirect('http://baidu.com');
+                        //表示存在这个name
+                        res.json({code : 1});
+                    } else {
+                        //表示不存在这个name
+                        res.json({code : 2});
+                    }
+                    connection.release();
+                });
+            }
+        });
+    }
     
 }

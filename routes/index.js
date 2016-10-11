@@ -36,6 +36,6 @@ module.exports = function (app) {
 
     //查询注册的姓名,学号是否重复
     app.post('/checkNameOrSN', function (req, res) {
-        
+        userDao.checkNameOrSN(req, res);
     });
 };
