@@ -7,14 +7,7 @@ var userDao = require('../dao/userDao');
 
 module.exports = function (app) {
     //
-    app.get('/', function (req, res) {
-        res.render('index');
-    });
-
-    app.post('/', function (req, res) {
-        
-        res.send('该用户未报名!');
-    });
+    
 
     app.get('/sign', function (req, res) {
         res.render('sign_up/countdown', {
@@ -31,11 +24,65 @@ module.exports = function (app) {
     });
     
     app.post('/form', function (req, res) {
-        userDao.add(req, res);
+        /*if(req.body){
+            res.redirect('/form');
+        } else {*/
+            userDao.add(req, res, function (err, back) {
+                if (back.code === 1) {
+                    res.render('form/result', {
+                        title: '结果',
+                        step: 3,
+                        code: back.code,
+                        msg: back.msg
+                    });
+                } else if (back.code === 2) {
+                    switch (back.msg.direction) {
+                        case 'safe':
+                            back.msg.direction = '安全组';
+                            break;
+                        case 'fe' :
+                            back.msg.direction = '前端组';
+                            break;
+                        case 'network' :
+                            back.msg.direction = '网络组';
+                            break;
+                        default:
+                            ;
+                    }
+                    switch (back.msg.grade) {
+                        case 'one':
+                            back.msg.grade = '大一';
+                            break;
+                        case 'two' :
+                            back.msg.grade = '大二';
+                            break;
+                        case 'three' :
+                            back.msg.grade = '大三';
+                            break;
+                        case 'four' :
+                            back.msg.grade = '大四';
+                            break;
+                        default:
+                            ;
+                    }
+                    res.render('form/result', {
+                        title: '结果',
+                        step: 3,
+                        code: back.code,
+                        msg: back.msg
+                    });
+                }
+            });
+       // }
     });
 
     //查询注册的姓名,学号是否重复
     app.post('/checkNameOrSN', function (req, res) {
-        userDao.checkNameOrSN(req, res);
+        userDao.checkNameOrSN(req, res, function (err, code) {
+            if(err) {
+                return res.send('数据库链接错误' + err);
+            }
+            res.json({ code : code });
+        });
     });
 };

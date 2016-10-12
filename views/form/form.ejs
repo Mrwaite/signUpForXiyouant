@@ -13,22 +13,22 @@
                 <a class="ui ribbon orange label">填写个人信息</a>
 
                 <!--提交表单-->
-                <form id="submitForm" class="ui form" method="post">
-                    <div class="fields" style="margin-bottom: 7%;">
+                <form id="submitForm" class="ui form" method="post" action="/form">
+                    <div class="fields" style="margin-bottom: 7%;position: relative;">
                         <div class="sixteen wide field">
                             <label>姓名</label>
                             <input id="name" type="text" name="name" placeholder="Name">
                             <div id="name_lable" class="ui left pointing red basic label v-hidden" >请输入中文</div>
                         </div>
                     </div>
-                    <div class="fields" style="margin-bottom: 7%;">
+                    <div class="fields" style="margin-bottom: 7%;position: relative;">
                         <div class="sixteen wide field">
                             <label>学号</label>
                             <input id="stNumber" type="text" name="stNumber" placeholder="student ID">
                             <div id="stNumber_lable" class="ui left pointing red basic label v-hidden" >请输入8位学号</div>
                         </div>
                     </div>
-                    <div class="fields" style="margin-bottom: 7%;">
+                    <div class="fields" style="margin-bottom: 7%;position: relative;">
                         <div class="sixteen wide field">
                             <label>联系方式</label>
                             <input id="telNumber" type="text" name="telNumber" placeholder="phone number">
@@ -39,9 +39,9 @@
                         <div class="twelve wide field">
                             <label>预期方向</label>
                             <select name="direction" class="ui fluid dropdown">
-                                <option value="safe">安全</option>
-                                <option value="fe">前端</option>
-                                <option value="linux">运维</option>
+                                <option value="safe">安全组</option>
+                                <option value="fe">前端组</option>
+                                <option value="network">网络组</option>
                             </select>
                         </div>
                         <div class="four wide field">
@@ -68,6 +68,7 @@
                         </div>
                     </div>
                     <button id="submit" class="ui blue button center" type="submit">提交</button>
+                    <div id="submit_lable" class="ui left pointing red basic label v-hidden" >列表信息不能为空</div>
                 </form>
                 <!--表单END-->
             </div>
@@ -75,7 +76,10 @@
     </div>
 </div>
 
+
+
 </body>
+<script src="/javascripts/xss.js"></script>
 <% include ../footer.ejs %>
 <script src="/javascripts/sign_up/form.js"></script>
 </html>

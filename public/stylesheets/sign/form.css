@@ -50,17 +50,7 @@ body {
     position: absolute;
     left:100%;
     width:22%;
-}
-
-#telNumber_lable {
-    top:27%;
-}
-#name_lable {
-    top: 3.5%;
-}
-
-#telNumber_lable {
-    top: 15.4%;
+    top: 25px;
 }
 
 #submit {
@@ -90,21 +80,74 @@ body {
     #nav_title {
         margin-left: 12.4%;
     }
-}
-
-@media (max-width:450px) {
     #nav_title{
         margin-left: 0%;
     }
 }
 
 
+@media (max-width:910px) {
+    #stNumber_lable, #telNumber_lable{
+        top:23px;
+    }
+}
+
+@media (max-width:767px) {
+    #stNumber_lable{
+        top:22px;
+    }
+    #name_lable, #telNumber_lable{
+        top:20px;
+    }
+}
+
+@media (max-width:425px) {
+    #name_lable, #stNumber_lable, #telNumber_lable {
+        position: absolute;
+        text-align: center;
+        margin-left: 0;
+    }
+
+    #name_lable {
+        left: 50%;
+        width: 50%;
+        top: 52px;
+    }
+
+    #stNumber_lable {
+        left: 50%;
+        width: 50%;
+        top: 52px;
+    }
 
 
-.v-hidden {
+    #telNumber_lable {
+        left: 50%;
+        width: 60%;
+        top: 52px;
+    }
+}
+
+
+
+    .v-hidden {
     visibility: hidden;
 }
 
 .v-visible {
     visibility: visible;
+}
+
+#submit_lable {
+    position: absolute;
+    width: 26%;
+    margin-top: 6%;
+}
+
+@media (max-width:650px) {
+    #submit_lable {
+        position: absolute;
+        width: 37%;
+        margin-top: 4%;
+    }
 }

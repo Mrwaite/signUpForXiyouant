@@ -1,0 +1,48 @@
+<% include ../header.ejs %>
+<link rel="stylesheet" href="/stylesheets/sign/form.css" >
+</head>
+<body id="example" class="basic minimal">
+<!--姓名 性别 预期方向 电话号码 学号 专业 年级-->
+
+<%include ../nav.ejs%>
+
+<% if(code === 2) { %>
+
+<div class="ui link cards">
+    <div class="card" style="margin: 0 auto;margin-top: 65px;">
+        <div class="image">
+            <% if(msg.sex === 'male') {%>
+                <img src="/images/man.png">
+            <% } else { %>
+                <img src="/images/feman.png">
+            <% } %>
+        </div>
+        <div class="content">
+            <div class="header"><%= msg.name %></div>
+            <div class="meta">
+                <a><%= msg.sex %></a>
+            </div>
+            <div class="description">
+                学号 :  <%= msg.stNumber %> <br>
+                联系方式 : <%= msg.telNumber %> <br>
+                预期方向 : <%= msg.direction %> <br>
+                专业班级 : <%= msg.major %> <br>
+                年级 : <%= msg.grade %> <br>
+            </div>
+        </div>
+        <div class="extra content">
+            <span class="right floated">欢迎 </span>
+            <span><i class="user icon"></i> 下载试题 </span>
+        </div>
+    </div>
+</div>
+
+<% } else { %>
+
+<p>请与网络科技协会相关人员联系</p>
+
+<% } %>
+
+</body>
+<% include ../footer.ejs %>
+</html>

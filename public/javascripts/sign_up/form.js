@@ -18,22 +18,32 @@ function check(domID, post, bool) {
         if(VdomID) {
             if(new RegExp(matchRegExp[domID]).test(VdomID)) {
 
-                if(bool)
+                if(bool) {
                     $.post('/checkNameOrSN', JdomID, function (data) {
                         post(data);
                     });
+                } else {
+                    $('#' + domID).parent().removeClass('error');
+                    $('#' + domID +'_lable').addClass('v-hidden');
+                }
             } else {
                 $('#' + domID).parent().addClass('error');
                 $('#' + domID +'_lable').text(noMatchMsg[domID]).removeClass('v-hidden');
             }
         } else {
             $('#' + domID).parent().addClass('error');
-            $('#' + domID +'_lable').style.addClass('v-hidden');
+            $('#' + domID +'_lable').addClass('v-hidden');
         }
     });
 }
 
 $(document).ready(function () {
+    if(screen.width < 426 ) {
+        $('#name_lable').removeClass('left');
+        $('#stNumber_lable').removeClass('left');
+        $('#telNumber_lable').removeClass('left');
+        $('.fields').each(function(index, field){field.style.marginBottom='0px'})
+    }
     check('name', function (data) {
         if (data.code === 1) {
             //表示存在这个name
@@ -41,7 +51,7 @@ $(document).ready(function () {
             $('#name_lable').text('此姓名已被使用').removeClass('v-hidden');
         } else {
             $('#name').parent().removeClass('error');
-            $('#name_lable').style.addClass('v-hidden');
+            $('#name_lable').addClass('v-hidden');
         }
     }, true);
     check('stNumber', function (data) {
@@ -55,4 +65,16 @@ $(document).ready(function () {
         }
     }, true);
     check('telNumber', function () {}, false);
+    $('#submitForm').submit(function () {
+        var inputText = $('#submitForm input[type=text]');
+        for(var i = 0; i < 3;i++){
+            if(inputText[i].value === '') {
+                $('#submit_lable').removeClass('v-hidden');
+                return false;
+            }
+        }
+        $('#submit_lable').addClass('v-hidden');
+        inputText[3].value = filterXSS(inputText[3].value);
+        return true;
+    });
 });

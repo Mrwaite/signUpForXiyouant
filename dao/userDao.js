@@ -21,51 +21,58 @@ var jsonWrite = function (res, ret) {
     }
 };
 
-module.exports ={
+var methods = {
     //向数据库添加记录
-    add : function (req, res) {
-        pool.getConnection(function (err, connection) {
-            //获取前台页面传过来的数据
-            var param = req.body;
-            var paramArray = [];
-
-            //var iconv = new Iconv('GBK', 'UTF-8');
-
-            for(var key in param) {
-                if(param.hasOwnProperty(key)) {
-                    paramArray.push(param[key]);
-                }
+    add : function (req, res, callback) {
+        methods.checkNameOrSN(req, res, function (err, code) {
+            if(err) {
+                return callback(err, null);
             }
-            //建立连接
-            //'INSERT INTO USER'
-            connection.query($sql.insert, paramArray, function (err, result) {
-                if (err) {
-                    res.send(err);
-                    connection.release();
-                } else {
-                    if (result) {
-                        result = {
-                            code : 200,
-                            msg : '增加成功',
+            if(code === 1){
+                callback(null, { code : code , msg : '姓名或学号已被注册'});
+            } else if (code === 2) {
+                pool.getConnection(function (err, connection) {
+                    //获取前台页面传过来的数据
+                    var param = req.body;
+                    var paramArray = [];
 
-                        };
+                    //var iconv = new Iconv('GBK', 'UTF-8');
+
+                    for(var key in param) {
+                        if(param.hasOwnProperty(key)) {
+                            paramArray.push(param[key]);
+                        }
                     }
+                    //建立连接
+                    //'INSERT INTO USER'
+                    connection.query($sql.insert, paramArray, function (err, result) {
+                        if (err) {
+                            return callback(err, null);
+                            connection.release();
+                        } else {
+                            if (result) {
+                                callback(null, { code : code , msg : req.body});
+                            }
 
-                    //以json形式, 把操作结果返回给前台页面
-                    jsonWrite(res, result);
+                            //以json形式, 把操作结果返回给前台页面
+                            //释放连接
 
-                    //释放连接
-                    connection.release();
-                }
+                            connection.release();
+                        }
 
-            });
+                    });
+                });
+                
+            }
+
         });
+
     },
-    
-    checkNameOrSN : function (req, res) {
+
+    checkNameOrSN : function (req, res, callback) {
         pool.getConnection(function (err, connection) {
             if(err) {
-                //数据库连接失败
+                return callback(err, null);
             }
             var param = req.body;
             var select = '';
@@ -73,14 +80,14 @@ module.exports ={
                 select = "select users.name from users where users.name=" + "'" + param.name + "'";
                 connection.query(select, function (err, result) {
                     if(err) {
-                        res.send(err);
+                        callback(err, null);
                     }
                     if(result.length > 0) {
                         //表示存在这个name
-                        res.json({code : 1});
+                        callback(null, 1);
                     } else {
                         //表示不存在这个name
-                        res.json({code : 2});
+                        callback(null, 2);
                     }
                     connection.release();
                 });
@@ -88,20 +95,22 @@ module.exports ={
                 select = "select users.stNumber from users where users.stNumber=" + "'" + param.stNumber + "'";
                 connection.query(select, function (err, result) {
                     if(err) {
-                        res.send(err);
+                        callback(err, null);
                     }
                     if(result.length > 0) {
                         //res.redirect('http://baidu.com');
                         //表示存在这个name
-                        res.json({code : 1});
+                        callback(null, 1);
                     } else {
                         //表示不存在这个name
-                        res.json({code : 2});
+                        callback(null, 2);
                     }
                     connection.release();
                 });
             }
         });
     }
-    
-}
+
+};
+
+module.exports = methods;
