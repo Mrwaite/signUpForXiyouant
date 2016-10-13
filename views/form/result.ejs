@@ -6,15 +6,15 @@
 
 <%include ../nav.ejs%>
 
-<% if(code === 2) { %>
+<% if(code === '2') { %>
 
-<div class="ui link cards">
+<div class="ui link cards" style="margin: 0;">
     <div class="card" style="margin: 0 auto;margin-top: 65px;">
         <div class="image">
-            <% if(msg.sex === 'male') {%>
+            <% if(msg.sex === '男') {%>
                 <img src="/images/man.png">
             <% } else { %>
-                <img src="/images/feman.png">
+                <img src="/images/female.png">
             <% } %>
         </div>
         <div class="content">
@@ -39,7 +39,7 @@
 
 <% } else { %>
 
-<p>请与网络科技协会相关人员联系</p>
+<p style="margin: 0 auto;margin-top: 100px;">请与网络科技协会相关人员联系</p>
 
 <% } %>
 

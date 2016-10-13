@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 var userDao = require('../dao/userDao');
 
-/* GET home page. */
 
 
 module.exports = function (app) {
-    //
-    
+
 
     app.get('/sign', function (req, res) {
         res.render('sign_up/countdown', {
@@ -28,50 +26,48 @@ module.exports = function (app) {
             res.redirect('/form');
         } else {*/
             userDao.add(req, res, function (err, back) {
-                if (back.code === 1) {
-                    res.render('form/result', {
-                        title: '结果',
-                        step: 3,
-                        code: back.code,
-                        msg: back.msg
-                    });
-                } else if (back.code === 2) {
-                    switch (back.msg.direction) {
-                        case 'safe':
-                            back.msg.direction = '安全组';
-                            break;
-                        case 'fe' :
-                            back.msg.direction = '前端组';
-                            break;
-                        case 'network' :
-                            back.msg.direction = '网络组';
-                            break;
-                        default:
-                            ;
-                    }
-                    switch (back.msg.grade) {
-                        case 'one':
-                            back.msg.grade = '大一';
-                            break;
-                        case 'two' :
-                            back.msg.grade = '大二';
-                            break;
-                        case 'three' :
-                            back.msg.grade = '大三';
-                            break;
-                        case 'four' :
-                            back.msg.grade = '大四';
-                            break;
-                        default:
-                            ;
-                    }
-                    res.render('form/result', {
-                        title: '结果',
-                        step: 3,
-                        code: back.code,
-                        msg: back.msg
-                    });
+                var url = '';
+                switch (back.msg.direction) {
+                    case 'safe':
+                        back.msg.direction = '安全组';
+                        break;
+                    case 'fe' :
+                        back.msg.direction = '前端组';
+                        break;
+                    case 'network' :
+                        back.msg.direction = '网络组';
+                        break;
+                    default:
+                        ;
                 }
+                switch (back.msg.grade) {
+                    case 'one':
+                        back.msg.grade = '大一';
+                        break;
+                    case 'two' :
+                        back.msg.grade = '大二';
+                        break;
+                    case 'three' :
+                        back.msg.grade = '大三';
+                        break;
+                    case 'four' :
+                        back.msg.grade = '大四';
+                        break;
+                    default:
+                        ;
+                }
+                switch (back.msg.sex) {
+                    case 'male':
+                        back.msg.sex = '男';
+                        break;
+                    case 'female' :
+                        back.msg.sex = '女';
+                        break;
+                    default:
+                        ;
+                }
+                url = '/result?code=' + back.code + '&name='+ back.msg.name +  '&stNumber=' + back.msg.stNumber + '&telNumber=' + back.msg.telNumber  + '&direction=' + back.msg.direction  + '&sex=' + back.msg.sex + '&major=' + back.msg.major + '&grade=' + back.msg.grade ;
+                res.redirect(url);
             });
        // }
     });
@@ -84,5 +80,24 @@ module.exports = function (app) {
             }
             res.json({ code : code });
         });
+    });
+    
+    app.get('/result', function (req, res) {
+        var params = req.query;
+        var msg = {
+            name : params.name,
+            stNumber : params.stNumber,
+            telNumber : params.telNumber,
+            direction : params.direction,
+            sex : params.sex,
+            major : params.major,
+            grade : params.grade
+        }
+        res.render('form/result', {
+            title : '结果',
+            step : 3,
+            code : params.code,
+            msg : msg
+        })
     });
 };
