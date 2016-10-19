@@ -9,65 +9,59 @@ module.exports = function (app) {
 
     app.get('/sign', function (req, res) {
         res.render('sign_up/countdown', {
-            title : '倒计时',
-            step : 1
+            title : '倒计时'
         });
     });
 
     app.get('/form', function (req, res) {
         res.render('form/form', {
-            title : '表单',
-            step : 2
+            title : '表单'
         });
     });
     
     app.post('/form', function (req, res) {
-        /*if(req.body){
-            res.redirect('/form');
-        } else {*/
             userDao.add(req, res, function (err, back) {
-                var url = '';
                 switch (back.msg.direction) {
-                    case 'safe':
+                    case '1':
                         back.msg.direction = '安全组';
                         break;
-                    case 'fe' :
+                    case '2' :
                         back.msg.direction = '前端组';
                         break;
-                    case 'network' :
+                    case '3' :
                         back.msg.direction = '网络组';
                         break;
                     default:
                         ;
                 }
                 switch (back.msg.grade) {
-                    case 'one':
+                    case '1' :
                         back.msg.grade = '大一';
                         break;
-                    case 'two' :
+                    case '2' :
                         back.msg.grade = '大二';
                         break;
-                    case 'three' :
+                    case '3' :
                         back.msg.grade = '大三';
                         break;
-                    case 'four' :
+                    case '4' :
                         back.msg.grade = '大四';
                         break;
                     default:
                         ;
                 }
                 switch (back.msg.sex) {
-                    case 'male':
+                    case '1' :
                         back.msg.sex = '男';
                         break;
-                    case 'female' :
+                    case '2' :
                         back.msg.sex = '女';
                         break;
                     default:
                         ;
                 }
-                url = '/result?code=' + back.code + '&name='+ back.msg.name +  '&stNumber=' + back.msg.stNumber + '&telNumber=' + back.msg.telNumber  + '&direction=' + back.msg.direction  + '&sex=' + back.msg.sex + '&major=' + back.msg.major + '&grade=' + back.msg.grade ;
-                res.redirect(url);
+
+                res.json({code : back.code, msg : back.msg});
             });
        // }
     });
@@ -95,9 +89,9 @@ module.exports = function (app) {
         }
         res.render('form/result', {
             title : '结果',
-            step : 3,
             code : params.code,
             msg : msg
         })
     });
+
 };

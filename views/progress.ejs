@@ -1,0 +1,35 @@
+<% include header.ejs %>
+</head>
+<body id="example">
+<!--导航-->
+<% include nav.ejs %>
+
+<!--main-->
+<div id="maincontent" class="ui main container mobile only" style="margin-top:200px;">
+    <div class="ui stackable grid">
+        <div class="column">
+            <div id="regUtgaende" class="ui stacked segment">
+                <a class="ui ribbon orange label">查询个人进度</a>
+                <div class="ui icon input">
+                    <input id="name" type="text" placeholder="输入已注册学号">
+                    <i id="search" class="inverted circular search link icon"></i>
+                </div>
+                <div class="ui active progress" data-percent="77">
+                    <div id="bar" class="bar" style="transition-duration: 300ms; width: 77%;">
+                        <div id="bar_progress" class="progress">77%</div>
+                    </div>
+                    <div id="bar_text" class="label">二面过</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--版权-->
+<% include footer.ejs %>
+
+</body>
+<!--js脚本-->
+<% include script.ejs %>
+
+</html>

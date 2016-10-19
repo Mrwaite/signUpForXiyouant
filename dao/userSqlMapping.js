@@ -3,8 +3,7 @@ var user = {
     update:'update users set name=?,stNumber=?, telNumber=?, direction=?, sex=?, major=?, grade=? where id=?',
     delete: 'delete from users where id=?',
     queryById: 'select * from users where id=?',
-    queryAll: 'select * from users',
-    queryNameAndSt : 'select users.name , users.stNumber from users where users.name=? and users.stNumber=?'
+    queryAll: 'select * from users'
 };
 
 module.exports = user;

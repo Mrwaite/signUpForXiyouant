@@ -65,16 +65,54 @@ $(document).ready(function () {
         }
     }, true);
     check('telNumber', function () {}, false);
-    $('#submitForm').submit(function () {
-        var inputText = $('#submitForm input[type=text]');
-        for(var i = 0; i < 3;i++){
-            if(inputText[i].value === '') {
-                $('#submit_lable').removeClass('v-hidden');
-                return false;
-            }
+    $('#submit').on('click', function (e) {
+        if( $('#name').val() !== '' && $('#stNumber').val() !== '' &&  $('#telNumber').val() !== '' &&  $('#major').val() !== '') {
+            $('#submit_lable').addClass('v-hidden');
+            var data = {
+                name :  $('#name').val(),
+                stNumber : $('#stNumber').val(),
+                telNumber : $('#telNumber').val(),
+                direction : parseInt($('#dir').val()),
+                sex : parseInt($('#sex').val()),
+                major : $('#major').val(),
+                grade : parseInt($('#grade').val())
+            };
+            $.ajax({
+                type : 'post',
+                url : '/form',
+                data : data,
+                success : function (data) {
+                    var code = data.code;
+                    var msg = data.msg;
+                    $('#submitForm input').attr("disabled",true);
+                    $('#submitForm select').attr("disabled",true);
+                    $('#submit').addClass('disabled');
+                    if(code === 1) {
+                        $('#show_msg').html('出现未知错误,请立即与管理员联系.管理员qq:1040749215');
+                    } else if(code === 2) {
+                        if(msg.sex === '男'){
+                            $('#show_img').html($('<img src="/images/man.png">'));
+                        } else {
+                            $('#show_img').html($('<img src="/images/feman.png">'));
+                        }
+                        $('#show_name').text(msg.name);
+                        $('#show_sex').text(msg.sex);
+                        var showMsg = '学号 : ' + msg.stNumber +'  <br>'+
+                        '联系方式 : '+ msg.telNumber +' <br>' +
+                        '预期方向 : ' + msg.direction + ' <br>'+
+                        '专业班级 : ' + msg.major + '<br>'+
+                        '年级 : '+ msg.grade +' <br>'
+                            ;
+                        $('#show_msg').html(showMsg);
+                    }
+                    $('.ui.modal')
+                        .modal('show')
+                    ;
+                }
+
+            });
+        } else {
+            $('#submit_lable').removeClass('v-hidden');
         }
-        $('#submit_lable').addClass('v-hidden');
-        inputText[3].value = filterXSS(inputText[3].value);
-        return true;
     });
 });

@@ -15,8 +15,8 @@ body {
 }
 
 #example #maincontent {
-    margin-top: 7em;
-    margin-bottom: -7em;
+    top: 7em;
+    margin-bottom: 13em;
 }
 #maincontent .ribbon {
     margin-bottom: 1.3em;
@@ -150,4 +150,28 @@ body {
         width: 37%;
         margin-top: 4%;
     }
+}
+
+/*card css*/
+
+.ui.modal {
+    background: transparent;
+    box-shadow: none;
+    margin-top: -22.5rem !important;
+}
+
+.ui.link.cards .card:hover {
+    cursor: default;
+    z-index: 5;
+    background: #fff;
+    border: none;
+    box-shadow: 0 3px 0 0 #bebebf,0 0 0 1px rgba(39,41,43,.3);
+}
+
+.ui.link.cards .card {
+    cursor: default;
+    z-index: 5;
+    background: #fff;
+    border: none;
+    box-shadow: 0 3px 0 0 #bebebf,0 0 0 1px rgba(39,41,43,.3);
 }

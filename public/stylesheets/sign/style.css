@@ -1,4 +1,96 @@
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
 
+.animated.infinite {
+    animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+    animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+    animation-duration: .75s;
+}
+
+
+
+
+@keyframes slideInDown {
+    from {
+        transform: translate3d(0, -100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.slideInDown {
+    animation-name: slideInDown;
+}
+
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 100%, 0);
+        visibility: visible;
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.slideInUp {
+    animation-name: slideInUp;
+}
+
+#example #nav{
+    margin-top : 5px;
+    margin-bottom : 5px;
+}
+
+@media only screen and (min-width: 1200px) {
+    #nav {
+        width: 1127px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+    #nav {
+        width: 933px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    #nav {
+        width: 723px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+    #nav {
+        width: 100% !important;
+        margin-left: 0em !important;
+        margin-right: 0em !important;
+    }
+}
+
+/*---------*/
 
 @media only screen and (max-width: 998px) {
     #example .fixed .container {
@@ -14,10 +106,10 @@
     }
 }
 #example .container {
-            position: relative;
-            width: 915px;
-            margin: 0px auto;
-        }
+    position: relative;
+    width: 915px;
+    margin: 0px auto;
+}
 
 @media (max-width : 920px) {
     #example .container {
@@ -30,8 +122,24 @@
     display : block;
 }
 
+#footer {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+@media only screen and (min-height: 920px) {
+    #footer {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #nav a:last-child{
+        display : none;
+    }
+}
 
 
-/*----------------------------*/
 
 
