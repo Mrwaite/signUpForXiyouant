@@ -3,23 +3,14 @@ var mysql = require('mysql'),
     $conf = require('../conf/db'),
     $sql = require('./userSqlMapping');
 
+var xss = require('xss');
+
 
 
 
 //使用连接池,提升性能
 var pool = mysql.createPool($conf.mysql);
 
-//向前台返回JSON方法的简单封装
-var jsonWrite = function (res, ret) {
-    if (typeof ret === 'undefined') {
-        res.json({
-            code : '1',
-            msg : '操作失败'
-        });
-    } else {
-        res.json(ret);
-    }
-};
 
 var methods = {
     //向数据库添加记录
@@ -40,6 +31,7 @@ var methods = {
 
                     for(var key in param) {
                         if(param.hasOwnProperty(key)) {
+                            param[key] = xss(param[key]);
                             paramArray.push(param[key]);
                         }
                     }
@@ -51,7 +43,7 @@ var methods = {
                             connection.release();
                         } else {
                             if (result) {
-                                callback(null, { code : code , msg : req.body});
+                                callback(null, { code : code , msg : param});
                             }
 
                             //以json形式, 把操作结果返回给前台页面
