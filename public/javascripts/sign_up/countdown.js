@@ -182,4 +182,4 @@ var Countdown = {
 
 
 // Let's go !
-Countdown.init('Sep 9, 2016 05:07');
+Countdown.init('Oct 21, 2016 05:07');

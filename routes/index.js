@@ -95,6 +95,10 @@ module.exports = function (app) {
             msg : msg
         })
     });
-    
+
+    app.get('/test', function (req, res) {
+        res.json(req.body);
+    });
+
 
 };
