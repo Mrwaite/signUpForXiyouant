@@ -1,7 +1,7 @@
 var matchRegExp = {
     name : '^[\\u4e00-\\u9fa5]{0,}$',
     stNumber : '^\\d{8}$',
-    telNumber : '^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$'
+    telNumber : '^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[0-9]|18[0|1|2|3|5|6|7|8|9])\\d{8}$'
 };
 
 var noMatchMsg = {
@@ -10,14 +10,20 @@ var noMatchMsg = {
     telNumber: '请输入规范手机号码'
 };
 
+var input_tag = {
+    name : false,
+    stNumber : false,
+    telNumber : false
+}
+
 function check(domID, post, bool) {
     $('#'+ domID).on('blur', function (e) {
         var VdomID = $('#' + domID).val();
         var JdomID = {};
         JdomID[domID] = VdomID;
+        $('#submit_lable').addClass('v-hidden');
         if(VdomID) {
             if(new RegExp(matchRegExp[domID]).test(VdomID)) {
-
                 if(bool) {
                     $.post('/checkNameOrSN', JdomID, function (data) {
                         post(data);
@@ -25,10 +31,14 @@ function check(domID, post, bool) {
                 } else {
                     $('#' + domID).parent().removeClass('error');
                     $('#' + domID +'_lable').addClass('v-hidden');
+                    input_tag[domID] = true;
+                    if(input_tag.name & input_tag.stNumber & input_tag.telNumber) $('#submit').removeClass('disabled');
                 }
             } else {
+                input_tag[domID] = false;
                 $('#' + domID).parent().addClass('error');
                 $('#' + domID +'_lable').text(noMatchMsg[domID]).removeClass('v-hidden');
+                if(!(input_tag.name & input_tag.stNumber & input_tag.telNumber)) $('#submit').addClass('disabled');
             }
         } else {
             $('#' + domID).parent().addClass('error');
@@ -47,21 +57,29 @@ $(document).ready(function () {
     check('name', function (data) {
         if (data.code === 1) {
             //表示存在这个name
+            input_tag.name = false;
             $('#name').parent().addClass('error');
             $('#name_lable').text('此姓名已被使用').removeClass('v-hidden');
+            if(!(input_tag.name & input_tag.stNumber & input_tag.telNumber)) $('#submit').addClass('disabled');
         } else {
+            input_tag.name = true;
             $('#name').parent().removeClass('error');
             $('#name_lable').addClass('v-hidden');
+            if(input_tag.name & input_tag.stNumber & input_tag.telNumber) $('#submit').removeClass('disabled');
         }
-    }, true);
+    }, false);
     check('stNumber', function (data) {
         if (data.code === 1) {
             //表示存在这个name
+            input_tag.stNumber = false;
             $('#stNumber').parent().addClass('error');
             $('#stNumber_lable').text('此学号已经被使用').removeClass('v-hidden');
+            if(!(input_tag.name & input_tag.stNumber & input_tag.telNumber)) $('#submit').addClass('disabled');
         } else {
+            input_tag.stNumber = true;
             $('#stNumber').parent().removeClass('error');
             $('#stNumber_lable').addClass('v-hidden');
+            if(input_tag.name & input_tag.stNumber & input_tag.telNumber) $('#submit').removeClass('disabled');
         }
     }, true);
     check('telNumber', function () {}, false);
@@ -88,12 +106,12 @@ $(document).ready(function () {
                     $('#submitForm select').attr("disabled",true);
                     $('#submit').addClass('disabled');
                     if(code === 1) {
-                        $('#show_msg').html('出现未知错误,请立即与管理员联系.管理员qq:1040749215');
+                        $('#show_msg').html( msg +',请刷新重新提交,如若还是有问题请立即与管理员联系.');
                     } else if(code === 2) {
                         if(msg.sex === '男'){
                             $('#show_img').html($('<img src="/images/man.png">'));
                         } else {
-                            $('#show_img').html($('<img src="/images/feman.png">'));
+                            $('#show_img').html($('<img src="/images/female.png">'));
                         }
                         $('#show_name').text(msg.name);
                         $('#show_sex').text(msg.sex);
@@ -103,11 +121,18 @@ $(document).ready(function () {
                         '专业班级 : ' + msg.major + '<br>'+
                         '年级 : '+ msg.grade +' <br>'
                             ;
+                         if(msg.grade !== '大一') {
+                             if(msg.direction === '前端组')
+                                $('#paper').attr('href', '/topic/web_grade2.pdf');
+                             if(msg.direction === '网络组')
+                                $('#paper').attr('href', '/topic/net_grade2.pdf');
+                         }
                         $('#show_msg').html(showMsg);
                     }
                     $('.ui.modal')
                         .modal('show')
                     ;
+                    $('#submit').html('已提交');
                 }
 
             });

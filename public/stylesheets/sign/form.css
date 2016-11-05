@@ -1,5 +1,5 @@
 body {
-    height: calc(100% - 7em) !important;
+   /* height: calc(100% - 7em) !important;*/
     background: #fcfef5;
 }
 
@@ -116,7 +116,7 @@ body {
 
     #stNumber_lable {
         left: 50%;
-        width: 50%;
+        width: 60%;
         top: 52px;
     }
 

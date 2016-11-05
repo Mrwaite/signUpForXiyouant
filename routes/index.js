@@ -9,15 +9,19 @@ var userDao = require('../dao/userDao');
 module.exports = function (app) {
 
 
-    app.get('/sign', function (req, res) {
+    app.get('/', function (req, res) {
         res.render('sign_up/countdown', {
-            title : '倒计时'
+            title : '网协纳新:倒计时'
         });
     });
 
+    /*app.get('/img/!*.png', function (req, res) {
+        res.sendfile('')
+    })*/
+
     app.get('/form', function (req, res) {
         res.render('form/form', {
-            title : '表单'
+            title : '网协纳新:报名'
         });
     });
     

@@ -55,7 +55,7 @@
                     <div class="fields">
                         <div name="major" class="eight wide field">
                             <label>专业班级</label>
-                            <input id="major" type="text" name="major" placeholder="形如:网络1403">
+                            <input id="major" type="text" name="major" placeholder="例如:网络1403">
                         </div>
                         <div class="eight wide field">
                             <label>年级</label>
@@ -67,7 +67,7 @@
                             </select>
                         </div>
                     </div>
-                    <button id="submit" class="ui blue button center" type="button">提交</button>
+                    <button id="submit" class="ui blue button center disabled" type="button">提交</button>
                     <div id="submit_lable" class="ui left pointing red basic label v-hidden" >列表信息不能为空</div>
                 </form>
                 <!--表单END-->
@@ -96,8 +96,8 @@
                 </div>
             </div>
             <div class="extra content">
-                <span class="right floated">提交成功 </span>
-                <span><i class="user icon"></i> 下载试题 </span>
+                <span class="right floated">提交成功</span>
+                <span><i class="user icon"></i> <a id="paper" href="/topic/grade1.pdf">下载样卷</a> </span>
             </div>
         </div>
     </div>

@@ -1,6 +1,13 @@
 /* line 4, ../sass/countdown.scss */
+@font-face {
+  font-family: 'Helvetica';
+  src: local('Helvetica Blod'), local('Helvetica'), url('../../font/Helvetica Rounded LT Bold Condensed.ttf') format('truetype');
+}
+
+
 body {
   background-color: #f2f1ed;
+  font-famil : 'Helvetica', "PingFang SC", "Microsoft Yahei", "WenQuanYi Micro Hei", Arial, Verdana, 'Open Sans', sans-serif
 }
 
 /* line 8, ../sass/countdown.scss */
@@ -12,6 +19,7 @@ body {
   right: 0;
   margin: auto;
   height: 310px;
+  text-align: center;
 }
 
 /* line 18, ../sass/countdown.scss */
@@ -22,13 +30,15 @@ a {
 
 /* line 27, ../sass/countdown.scss */
 h1 {
+  margin-top: -0.6em !important;
   margin-bottom: 10px;
   text-align: center;
-  font: 300 2.25em "Lato";
+  font: 300 3.9em  "Microsoft Yahei";
   text-transform: uppercase;
 }
 /* line 33, ../sass/countdown.scss */
 h1 strong {
+
   font-weight: 400;
   color: #ea4c4c;
 }
@@ -37,7 +47,7 @@ h1 strong {
 h2 {
   margin-bottom: 10px;
   text-align: center;
-  font: 300 1em "Lato";
+  font: 300 2em "Microsoft Yahei";
   text-transform: uppercase;
 }
 /* line 45, ../sass/countdown.scss */
@@ -49,12 +59,13 @@ h2 strong {
 h3 {
   margin-bottom: 60px;
   text-align: center;
-  font: 300 0.7em "Lato";
+  font: 300 1.3em "Helvetica";
   text-transform: uppercase;
 }
 /* line 55, ../sass/countdown.scss */
 h3 strong {
   font-weight: 400;
+  letter-spacing: 2px;
 }
 
 /*hidden*/
@@ -68,6 +79,16 @@ h3 strong {
   width: 560px;
   margin: 0 auto;
 }
+
+.countdown:after {
+  content: '\20';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+
+
 /* line 65, ../sass/countdown.scss */
 .countdown .bloc-time {
   float: left;
@@ -82,7 +103,7 @@ h3 strong {
 .countdown .count-title {
   display: block;
   margin-bottom: 15px;
-  font: normal 0.94em "Lato";
+  font: normal 1.2em "Helvetica";
   color: #1a1a1a;
   text-transform: uppercase;
 }
@@ -109,7 +130,7 @@ h3 strong {
   left: 0;
   right: 0;
   margin: auto;
-  font: normal 2.94em/57px "Lato";
+  font: normal 2.94em/57px "Microsoft Yahei";
   font-weight: 700;
   color: #de4848;
 }
@@ -214,5 +235,65 @@ h3 strong {
 }
 
 
+@media (max-width: 767px) {
+  h1{
+    margin-top: 1em !important;
+    font: 300 2em "Microsoft Yahei";
+  }
+  h2{
+    font: 300 1.3em "Microsoft Yahei";
+  }
+  h3{
+    font: 300 0.7em "Helvetica";
+  }
+  h3 strong {
+    font-weight: 400;
+    letter-spacing: 1px;
+  }
+  .countdown {
+    display: inline-block;
+    width: auto;
+    /* margin: 0 auto; */
+    clear: both;
+    /* overflow: auto; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* text-align: center; */
+  }
+  .countdown .bloc-time {
+
+    margin-right: 13px;
+
+  }
+  .countdown .figure {
+    height: 54px;
+    width: 32px;
+  }
+  .countdown .count-title {
+    display: block;
+    margin-bottom: 15px;
+    font: normal 0.9em "Helvetica";
+    color: #1a1a1a;
+    text-transform: uppercase;
+  }
+}
+
+@media (max-width: 375px) {
+  h1{
+    margin-top: 1em !important;
+    font: 300 1.9em "Microsoft Yahei";
+  }
+  .countdown .figure > span{
+    font: normal 2.34em/57px "Microsoft Yahei";
+    font-weight: 700;
+  }
+  .countdown .bloc-time {
+    margin-right: 18px;
+  }
+  .countdown .figure {
+    height: 55px;
+    width: 28px;
+  }
+}
 
 
